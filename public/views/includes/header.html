@@ -1,0 +1,43 @@
+<a href="." class="logo">
+	<img src="images/logo.png" alt="" class="logoPic-def"/>
+	<img src="images/logo-hover.png" alt="" class="logoPic-hover"/>
+</a>
+
+<div class="header__lang-switcher" >
+	<div class="language-switcher">
+		<div class="language-switcher__selected"
+			 ng-repeat="language in HC.availableLanguages | filter: { isoCode: HC.defaultLanguage }">
+			{{ language.name }}
+			<span class="language-switcher__icon">
+				<img src="images/arrow.png" alt="" class="arrow-def"/>
+				<img src="images/arrow-black.png" alt="" class="arrow-hover"/>
+			</span>
+		</div>
+		<nav class="language-switcher__container" ng-if="HC.availableLanguages[0]">
+			<a ng-repeat="language in HC.availableLanguages"
+			   ng-click="HC.setLanguage(language.isoCode)"
+			   ng-class="{ 'selected' : HC.defaultLanguage == l.isoCode }"
+			   href="#"
+			   class="language-switcher__item">
+				{{ language.name }}
+			</a>
+		</nav>
+	</div>
+</div>
+
+<div class="box">
+	<nav class="nav">
+		<a ng-repeat="item in HC.menu"
+		   ui-route="{{ item.link }}"
+		   href="{{ item.link }}"
+		   ng-if="item.link"
+		   class="nav__item"
+		   ng-class="HC.isActiveMenuItem(item.active_part)">
+			{{ item.title }}
+		</a>
+	</nav>
+	<div class="search__wrap"
+		 ng-include
+		 src="'views/includes/search.html'">
+	</div>
+</div>

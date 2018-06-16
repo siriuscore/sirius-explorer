@@ -1,0 +1,120 @@
+<div data-ng-include src="'views/includes/connection.html'"></div>
+<div class="box" ng-controller="TransactionsController as TC" ng-init="TC.findThis()">
+	<div class="heading margin1">
+		<h1 class="heading__title" translate>Transaction</h1>
+		<div class="progress progress-striped active" ng-if="!TC.tx.txid">
+			<div class="progress-bar progress-bar-info">
+				<span translate>Loading Transaction Details</span> 
+				<span class="loader-gif"></span>
+			</div>
+		</div>
+		<div class="heading__sm" ng-if="TC.tx.txid">
+			<div class="heading__smLabel" translate>Transaction</div>
+			<div class="heading__smLabeled">
+				<div class=" copyParent copyParent-right">
+					<a href="" 
+					   class="copyBtn icon-copy" 
+					   ngclipboard 
+					   data-clipboard-text="{{ TC.tx.txid }}"></a>
+					<div class="copyText text">
+						{{ TC.tx.txid }}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="section section-summaryTransactions" ng-if="TC.tx.txid">
+		<div class="section__heading">
+			<h2 class="section__title in_bl" translate>Summary</h2>
+		</div>
+		<div class="summaryTransactions">
+			<ul class="list">
+				<li class="list__item">
+					<div class="list__left">
+						<b translate>Size</b>
+					</div>
+					<div class="list__right">
+						<div class="">
+							{{ TC.tx.size }} ({{ 'bytes' | translate }})
+						</div>
+					</div>
+				</li>
+				<li class="list__item">
+					<div class="list__left">
+						<b translate>Received Time</b>
+					</div>
+					<div class="list__right">
+						<div>
+							{{ TC.tx.time ? (TC.tx.time | amParse : 'X' | amDateFormat: 'MMMM D, YYYY h:mm:ss A') : 'N/A' }}
+						</div>
+					</div>
+				</li>
+				<li class="list__item">
+					<div class="list__left">
+						<b translate>Mined Time</b>
+					</div>
+					<div class="list__right">
+						<div class="" ng-if="TC.tx.blocktime">
+							{{ TC.tx.blocktime | amParse : 'X' | amDateFormat: 'MMMM D, YYYY h:mm:ss A' }}
+						</div>
+						<div class="" ng-if="!TC.tx.blocktime">
+							N/A
+						</div>
+					</div>
+				</li>
+				<li class="list__item">
+					<div class="list__left">
+						<b translate>Included in Block</b>
+					</div>
+					<div class="list__right">
+						<a ng-if="TC.tx.blockhash" href="block/{{ TC.tx.blockhash }}" class="mark">
+							{{ TC.tx.blockhash }}
+						</a>
+						<a ng-if="!TC.tx.blockhash" translate>Unconfirmed</a>
+					</div>
+				</li>
+				<li class="list__item" ng-if="TC.tx.receipt && TC.tx.receipt[0]">
+					<div class="list__left">
+						<b translate>TxReceiptStatus</b>
+					</div>
+					<div class="list__right">
+						<div>
+							{{ TC.tx.receipt[0].excepted.toLowerCase() === 'none' ? 'Success' : 'Fail(' + TC.tx.receipt[0].excepted + ')' }}
+						</div>
+					</div>
+				</li>
+				<li class="list__item" ng-if="TC.tx.isCoinBase">
+					<div class="list__left">
+						<b translate>Coinbase</b>
+					</div>
+					<div class="list__right">
+						<div class=" copyParent copyParent-left">
+							<a href="" 
+							   class="copyBtn icon-copy"
+							   ngclipboard 
+					   		   data-clipboard-text="{{ TC.tx.vin[0].coinbase }}"></a>
+							<div class="copyText text">
+								{{ TC.tx.vin[0].coinbase }}
+							</div>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="section section-detailsTransactions" ng-repeat="tx in TC.txs">
+		<div class="section__heading">
+			<h2 class="section__title" translate>Details</h2>
+		</div>
+		<div>
+			<div class="section__transactions">
+				<div class="transactions__item" 
+					ng-class="{ 'open' : tx.showAdditInfo }" 
+					ng-include 
+					src="'views/transaction/tx.html'">
+				</div>
+			</div> 
+		</div>
+	</div>
+</div>

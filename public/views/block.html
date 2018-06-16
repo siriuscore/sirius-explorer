@@ -1,0 +1,203 @@
+<div ng-include src="'views/includes/connection.html'"></div>
+<div class="box" ng-controller="BlocksController as BC" ng-init="BC.findOne()">
+	<div class="heading margin1">
+		<h1 class="heading__title">
+			Block #{{ BC.block.height }}
+		</h1>
+		<div class="heading__sm">
+			<div class="heading__smLabel" translate>BlockHash</div>
+			<div class="heading__smLabeled">
+				<div class=" copyParent copyParent-right">
+					<a href="" 
+					   class="copyBtn icon-copy" 
+					   ngclipboard 
+					   data-clipboard-text="{{ BC.block.hash }}"></a>
+					<div class="copyText text">
+						{{ BC.block.hash }}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>  
+
+	<div class="section section-summaryBlock">
+		<div class="section__heading">
+			<h2 class="section__title in_bl" translate>Summary</h2>
+			<span class="section__status">
+				({{ 'confirmed' | translate }})
+			</span>
+		</div>
+		<div class="summaryBlock">
+			<div class="col col-6">
+				<ul class="list">
+					<li class="list__item">
+						<div class="list__left">
+							<b translate>Number Of Transactions</b>
+						</div>
+						<div class="list__right">
+							<div class="">
+								{{ BC.block.tx.length }}
+							</div>
+						</div>
+					</li>
+					<li class="list__item">
+						<div class="list__left">
+							<b translate>Height</b>
+						</div>
+						<div class="list__right">
+							<div class="">
+								{{ BC.block.height }} 
+								<span class="special" ng-if="BC.block.isMainChain">
+									(Mainchain)
+								</span>
+								<span ng-if="!BC.block.isMainChain" class="special">
+									(Orphaned)
+								</span>
+							</div>
+						</div>
+					</li>
+					<li class="list__item">
+						<div class="list__left">
+							<b translate>Block Reward</b>
+						</div>
+						<div class="list__right">
+							<div class="">
+								{{ $root.currency.getConvertion(BC.block.reward) || BC.block.reward }} 
+							</div>
+						</div>
+					</li>
+					<li class="list__item">
+						<div class="list__left">
+							<b translate>Timestamp</b>
+						</div>
+						<div class="list__right">
+							<div class="">
+								{{ BC.block.time | amParse : 'X' | amDateFormat: 'MMMM D, YYYY h:mm:ss A' }}
+							</div>
+						</div>
+					</li>
+					<li class="list__item">
+						<div class="list__left">
+							<b translate>Mined by</b>
+						</div>
+						<div class="list__right">
+							<div class="" ng-if="BC.block.minedBy">
+								{{ BC.block.minedBy }}
+							</div>
+						</div>
+					</li>
+					<li class="list__item">
+						<div class="list__left">
+							<b translate>Merkle Root</b>
+						</div>
+						<div class="list__right">
+							<div class="copyParent copyParent-left pull-right">
+								<a href="" 
+								   class="copyBtn icon-copy"
+								   ngclipboard 
+					   			   data-clipboard-text="{{ BC.block.merkleroot }}"></a>
+								<div class="copyText text">
+									{{ BC.block.merkleroot }}
+								</div>
+							</div>
+						</div>
+					</li>
+					<li ng-if="BC.block.height !== 0" class="list__item">
+						<div class="list__left">
+							<b translate>Previous Block</b>
+						</div>
+						<div class="list__right">
+							<div class="">
+								<a href="block/{{ BC.block.previousblockhash }}">
+									<span class="mark">
+										{{ BC.block.height - 1 }}
+									</span>
+								</a>
+
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div class="col col-6">
+				<ul class="list">
+					<li class="list__item">
+						<div class="list__left">
+							<b translate>Difficulty</b>
+						</div>
+						<div class="list__right">
+							<div class="additional">
+								{{ BC.block.difficulty }}
+							</div>
+						</div>
+					</li>
+					<li class="list__item">
+						<div class="list__left">
+							<b translate>Bits</b>
+						</div>
+						<div class="list__right">
+							<div class="additional">
+								{{ BC.block.bits }}
+							</div>
+						</div>
+					</li>
+					<li class="list__item">
+						<div class="list__left">
+							<b translate>Size (bytes)</b>
+						</div>
+						<div class="list__right">
+							<div class="additional">
+								{{ BC.block.size }}
+							</div>
+						</div>
+					</li>
+					<li class="list__item">
+						<div class="list__left">
+							<b translate>Version</b>
+						</div>
+						<div class="list__right">
+							<div class="additional">
+                                {{ BC.block.version }}
+                            </div>
+						</div>
+					</li>
+					<li class="list__item">
+						<div class="list__left">
+							<b translate>Nonce</b>
+						</div>
+						<div class="list__right">
+							<div class="additional">
+								{{ BC.block.nonce }}
+							</div>
+						</div>
+					</li>
+					<li class="list__item" ng-if="BC.block.nextblockhash">
+						<div class="list__left">
+							<b translate>Next Block</b>
+						</div>
+						<div class="list__right">
+							<div class="">
+								<a href="block/{{ BC.block.nextblockhash }}">
+									<span class="mark">
+										{{ BC.block.height + 1 }}
+									</span>
+								</a>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div class="section section-transactionsBlock" 
+		 ng-controller="TransactionsController as TC" 
+		 ng-if="BC.block"
+		 ng-init="TC.load(BC.block.hash)">
+		<div class="section__heading">
+			<h2 class="section__title" translate>Transactions</h2>
+		</div>
+		<div ng-include src="'views/transaction/list.html'">
+		</div>
+	</div>
+</div>

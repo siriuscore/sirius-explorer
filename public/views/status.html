@@ -1,0 +1,237 @@
+<div ng-include src="'views/includes/connection.html'"></div>
+
+<div class="box">
+	<div class="heading margin1">
+		<h1 class="heading__title" translate>Application Status</h1>
+	</div>
+
+	<div class="section-appStatusWrap" ng-controller="StatusController as SC">
+		<div class="col col-7">
+			<div class="section section-appStatus">
+				<div class="section__heading bdb">
+					<h2 class="section__title" translate>Sync Status</h2>
+				</div>
+				<ul class="list" ng-init="SC.getSync()">
+					<li class="list__item">
+						<div class="list__left">
+							<b translate>Sync Progress</b>
+						</div>
+						<div class="list__right">
+							<div class="loader" 
+								 style="width : {{ SC.sync.syncPercentage }}%"
+								 ng-if="SC.sync.syncPercentage">
+								<div class="loader__text">
+									{{ SC.sync.syncPercentage }}% 
+									{{ 'Complete' | translate }}
+								</div>
+							</div>
+						</div>
+					</li>
+					<li class="list__item">
+						<div class="list__left">
+							<b translate>Current Sync Status</b>
+						</div>
+						<div class="list__right">
+							<div class="" ng-if="!SC.sync.error">
+								{{ SC.sync.status }}
+							</div>
+							<div class="error" ng-if="SC.sync.error">
+								<div class="error__icon icon-error"></div>
+								<div class="error__text">
+									{{ SC.sync.error }}
+								</div>
+							</div>
+						</div>
+					</li>
+					<li class="list__item">
+						<div class="list__left">
+							<b translate>Start Date</b>
+						</div>
+						<div class="list__right">
+							<div class="" am-time-ago="SC.sync.startTs">
+							</div>
+						</div>
+					</li>
+					<li class="list__item">
+						<div class="list__left">
+							<b translate>Initial Block Chain Height</b>
+						</div>
+						<div class="list__right">
+							<div class="">
+								{{ SC.sync.blockChainHeight }}
+							</div>
+						</div>
+					</li>
+					<li class="list__item">
+						<div class="list__left">
+							<b translate>Synced Blocks</b>
+						</div>
+						<div class="list__right">
+							<div class="">
+								{{ SC.sync.syncedBlocks }}
+							</div>
+						</div>
+					</li>
+					<li class="list__item">
+						<div class="list__left">
+							<b translate> Skipped Blocks 
+								<span class="fsz-13">
+									{{ SC.sync.skippedBlocks }}
+								</span>
+							</b>
+						</div>
+						<div class="list__right">
+							<div class=""></div>
+						</div>
+					</li>
+					<li class="list__item">
+						<div class="list__left">
+							<b translate>Sync Type</b>
+						</div>
+						<div class="list__right">
+							<div class="">
+								{{ SC.sync.type }}
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div class="section section-appStatus">
+				<div class="section__heading bdb">
+					<h2 class="section__title" translate>Last Blocks</h2>
+				</div>
+				<ul class="list" ng-init="SC.getStatus('LastBlockHash')">
+					<li class="list__item">
+						<div class="list__left">
+							<b translate>Last Block Hash 
+								<span class="fsz-13">
+									({{ 'Sirius' | translate }})
+								</span>
+							</b>
+						</div>
+						<div class="list__right">
+							<a href="block/{{ SC.lastblockhash }}" class="mark link">
+								{{ SC.lastblockhash }}
+							</a>
+						</div>
+					</li>
+					<li class="list__item">
+						<div class="list__left">
+							<b translate>Current Blockchain Tip 
+								<span class="fsz-13">
+									({{ insight | translate }})
+								</span>
+							</b>
+						</div>
+						<div class="list__right">
+							<a href="block/{{ SC.syncTipHash }}" class="mark link">
+								{{ SC.syncTipHash }}
+							</a>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="col col-5" ng-init="SC.getStatus('Info')">
+			<div class="section section-appStatus">
+				<div class="section__heading bdb">
+					<h2 class="section__title" translate>Sirius node information</h2>
+				</div>
+				<ul class="list">
+					<li	ng-include ng-if="!SC.loaded" src="'views/includes/infoStatus.html'"></li>
+					<li class="list__item">
+						<div class="list__left">
+							<b translate>Version</b>
+						</div>
+						<div class="list__right">
+							<div class="">
+								{{ SC.info.version }}
+							</div>
+						</div>
+					</li>
+					<li class="list__item">
+						<div class="list__left">
+							<b translate>Protocol Version</b>
+						</div>
+						<div class="list__right">
+							<div class="">
+								{{ SC.info.protocolversion }}
+							</div>
+						</div>
+					</li>
+					<li class="list__item">
+						<div class="list__left">
+							<b translate>Blocks</b>
+						</div>
+						<div class="list__right">
+							<div class="">
+								{{ SC.info.blocks }}
+							</div>
+						</div>
+					</li>
+					<li class="list__item">
+						<div class="list__left">
+							<b translate>Time Offset</b>
+						</div>
+						<div class="list__right">
+							<div class="">
+								{{ SC.info.timeoffset }}
+							</div>
+						</div>
+					</li>
+					<li class="list__item">
+						<div class="list__left">
+							<b translate>Connections to Other Nodes</b>
+						</div>
+						<div class="list__right">
+							<div class="">
+								{{ SC.info.connections }}
+							</div>
+						</div>
+					</li>
+					<li class="list__item">
+						<div class="list__left">
+							<b translate>Mining Difficulty</b>
+						</div>
+						<div class="list__right">
+							<div class="">
+								{{ SC.info.difficulty[ 'proof-of-stake' ] }}
+							</div>
+						</div>
+					</li>
+					<li class="list__item">
+						<div class="list__left">
+							<b translate>Network</b>
+						</div>
+						<div class="list__right">
+							<div class="">
+								{{ SC.info.network }}
+							</div>
+						</div>
+					</li>
+					<li class="list__item">
+						<div class="list__left">
+							<b translate>Proxy Settings</b>
+						</div>
+						<div class="list__right">
+							<div class="">
+								{{ SC.info.proxy }}
+							</div>
+						</div>
+					</li>
+					<li class="list__item">
+						<div class="list__left">
+							<b translate>Info Errors</b>
+						</div>
+						<div class="list__right">
+							<div class="">
+								{{ SC.info.infoErrors }}
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+

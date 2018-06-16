@@ -1,0 +1,103 @@
+<div ng-include src="'views/includes/connection.html'"></div>
+<div class="box" ng-controller="BlocksController as BC" ng-init="BC.loadList()">
+	<div class="heading margin1">
+		<h1 class="heading__title" translate>Blocks by Date</h1>
+	</div>
+	<div class="date__wrap">
+		<div class="pull-right">
+			<a href="blocks-date/{{ BC.datepicker.date - (24 * 60 * 60 * 1000) | amDateFormat: 'YYYY-MM-DD' }}" 
+			   class="date__btn prev"
+			   ng-if="BC.datepicker.date">
+				<span class="icon-arrow-left"></span>
+				{{ BC.datepicker.date - (24 * 60 * 60 * 1000) | amDateFormat: 'YYYY-MM-DD' }}
+			</a>
+			<a href="blocks-date/{{ BC.datepicker.date + (24 * 60 * 60 * 1000) | amDateFormat: 'YYYY-MM-DD' }}" 
+			   class="date__btn next"
+			   ng-if="!BC.pagination.isToday && BC.datepicker.date">
+				{{ BC.datepicker.date + (24 * 60 * 60 * 1000) | amDateFormat: 'YYYY-MM-DD' }}
+				<span class="icon-arrow-right2"></span>
+			</a>
+
+			<div class="date__textWrap">
+				<div class="" >
+					<div>
+						<a href="" 
+						   class="date__trigger  icon-calendar" 
+						   ng-click="BC.openDatepicker($event)"></a>
+						<div class="date__text datepicker-popup datepicker">
+							<input type="text"
+								   class="date__textField"
+								   uib-datepicker-popup="{{ BC.datepicker.format }}"
+								   ng-model="BC.date"
+								   is-open="BC.datepicker.isOpened"
+								   datepicker-options="BC.datepicker.dateOptions"
+								   date-disabled="BC.disableDatepicker(date, mode)"
+								   show-button-bar="false"
+								   readonly/>
+							<div class="fsz-13" ng-if="BC.pagination.currentTs">
+								{{ BC.pagination.isToday ? ('Today' | translate) : BC.calcDatesDifference() }}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="section section-blocks">
+		<div class="table">
+			<div class="tr tr-head">
+				<div class="th" translate>Height</div>
+				<div class="th" translate>Timestamp</div>
+				<div class="th text_r" translate>Transactions</div>
+				<div class="th" translate>Mined by</div>
+				<div class="th text_r" translate>Size</div>
+			</div>
+			<div class="preload__box" ng-if="BC.loading">
+				<span class="preload">
+					<span class="preloadInner"></span>
+				</span>
+			</div>
+			<div class="tr" ng-repeat='block in BC.blocks'>
+				<div class="td">
+					<a href="block/{{ block.hash }}" class="link mark">{{ block.height }}</a>
+				</div>
+				<div class="td">
+					{{ block.time * 1000 | amUtc | amDateFormat: 'MMM D, YYYY h:mm:ss A' }} (UTC)
+				</div>
+				<div class="td text_r">
+					{{ block.txlength }}
+				</div>
+				<div class="td">
+					<a class="mark" ng-if="block.minedBy" href="/address/{{ block.minedBy }}">
+						{{ block.minedBy }}
+					</a>
+					<span ng-if="!block.minedBy">
+						-
+					</span>
+				</div>
+				<div class="td text_r">
+					{{ block.size }}
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="btn-blocksWrap">
+		<a class="btn btn-blocks" 
+		   href="blocks-date/{{ BC.pagination.current }}" 
+		   ng-if="BC.before"
+		   translate>
+		   Latest blocks from this date
+		</a>
+		<a class="btn btn-blocks"
+		   ng-if="BC.blocks.length && BC.pagination.moreTs" 
+		   href="blocks-date/{{ BC.pagination.current }}/{{ BC.pagination.moreTs }}"
+		   translate>
+			Older blocks from this date
+		</a>
+	</div>
+	<div class="alert alert-danger" ng-if="!BC.blocks.length && !BC.loading" translate>
+		No blocks yet.
+	</div>
+</div>
+

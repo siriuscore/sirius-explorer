@@ -1,0 +1,40 @@
+{
+  "name": "sirius-explorer",
+  "description": "An open-source front-end for the Insight API.",
+  "author": {
+    "name": "Sirius",
+    "email": "hello@getsirius.io",
+    "url": "https://getsirius.io"
+  },
+  "version": "0.11.3",
+  "repository": "git://github.com/siriuscore/sirius-explorer.git",
+  "contributors": [],
+  "bugs": {
+    "url": "https://github.com/siriuscore/sirius-explorer/issues"
+  },
+  "homepage": "https://github.com/siriuscore/sirius-explorer",
+  "license": "MIT",
+  "keywords": [
+    "insight",
+    "blockchain",
+    "blockexplorer",
+    "sirius",
+    "siriuscore",
+    "front-end"
+  ],
+  "siriuscoreNode": "siriuscore-node",
+  "dependencies": {},
+  "devDependencies": {
+    "bower": "~1.2.8",
+    "grunt": "~0.4.2",
+    "grunt-cli": "~0.1.11",
+    "grunt-contrib-jshint": "~0.8.0",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-uglify": "~0.3.2",
+    "grunt-contrib-watch": "*",
+    "grunt-macreload": "*",
+    "grunt-css": "~0.5.4",
+    "grunt-markdown": "~0.5.0",
+    "grunt-angular-gettext": "^0.2.15"
+  }
+}
