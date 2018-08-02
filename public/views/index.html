@@ -60,7 +60,7 @@
 			<div class="limiter"></div>
 			<div class="clearfix">
 				<div class="item">
-					<div class="label">{{ IC.marketsInfo.price_usd }}</div>
+					<div class="label">{{ IC.marketsInfo.price_usd  | numeraljs : '0.000'}}</div>
 					<div class="labeled">Price in USD</div>
 				</div>
 				<div class="item">
