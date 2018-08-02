@@ -9,16 +9,17 @@ A Sirius blockchain explorer web application service for [Siriuscore Node](https
     ```bash
     nvm i v8
     nvm use v8
-    ```  
+    ```
+
 2. Install mongo https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/  
 
-3. Install sirius-bitcore https://github.com/siriuscore/sirius-bitcore
+3. Install the sirius core wallet https://github.com/siriuscore/sirius
 
     ```bash
     # with ZMQ
-    sudo apt-get install libzmq3-dev 
+    sudo apt-get install libzmq3-dev
     ```  
-4. Install siriuscore-node  
+4. Install siriuscore-node
 
     ```bash
     npm i siriuscore-node
@@ -77,7 +78,7 @@ A Sirius blockchain explorer web application service for [Siriuscore Node](https
 
 6. Edit sirius.conf  
 
-    ```
+    ```bash
     server=1
     whitelist=127.0.0.1
     logevents=1
@@ -95,7 +96,7 @@ A Sirius blockchain explorer web application service for [Siriuscore Node](https
     rpcpassword=password
     rpcport=8332
     addrindex=1
-    reindex=1
+    #reindex=1
     ```  
 
 7. Run Node  

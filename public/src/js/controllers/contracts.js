@@ -5,7 +5,7 @@ function($scope, $rootScope, $routeParams, $location, Contracts) {
 
     try {
         var addrStr = Contracts.getBitAddressFromContractAddress($routeParams.contractAddressStr);
-        $location.path('/address/' + addrStr);
+        $location.path('address/' + addrStr);
         return false;
     }
     catch (e) {
