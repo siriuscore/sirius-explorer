@@ -23,7 +23,9 @@
     "front-end"
   ],
   "siriuscoreNode": "siriuscore-node",
-  "dependencies": {},
+  "dependencies": {
+    "siriuscore-lib": "0.0.2"
+  },
   "devDependencies": {
     "bower": "~1.2.8",
     "grunt": "~0.4.2",
