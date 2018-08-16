@@ -23,20 +23,19 @@
     "front-end"
   ],
   "siriuscoreNode": "siriuscore-node",
-  "dependencies": {
-    "siriuscore-lib": "0.0.2"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "bower": "~1.2.8",
-    "grunt": "~0.4.2",
-    "grunt-cli": "~0.1.11",
-    "grunt-contrib-jshint": "~0.8.0",
-    "grunt-contrib-concat": "~0.3.0",
-    "grunt-contrib-uglify": "~0.3.2",
-    "grunt-contrib-watch": "*",
-    "grunt-macreload": "*",
-    "grunt-css": "~0.5.4",
-    "grunt-markdown": "~0.5.0",
-    "grunt-angular-gettext": "^0.2.15"
+    "bower": "^1.8.4",
+    "grunt": "^1.0.3",
+    "grunt-angular-gettext": "^2.3.13",
+    "grunt-cli": "^1.3.0",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-jshint": "^1.1.0",
+    "grunt-contrib-uglify": "^3.4.0",
+    "grunt-contrib-watch": "^1.1.0",
+    "grunt-css": "^0.5.4",
+    "grunt-macreload": "^0.1.4",
+    "grunt-markdown": "^0.7.0",
+    "siriuscore-lib": "0.0.2"
   }
 }
