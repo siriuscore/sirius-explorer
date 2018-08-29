@@ -58,7 +58,7 @@ angular.module('insight.search').controller('SearchController',
 						}, function(hash) {
 
 							_resetSearch();
-							$location.path('/block/' + hash.blockHash);
+							$location.path('block/' + hash.blockHash);
 						}, function() { //not found, fail :(
 
 							self.loading = false;
@@ -72,7 +72,7 @@ angular.module('insight.search').controller('SearchController',
                         }, function() {
 
                             _resetSearch();
-                            $location.path('/token/' + q);
+                            $location.path('token/' + q);
                         }, function () {
                             self.loading = false;
                             _badQuery();

@@ -6,7 +6,7 @@ function($routeParams, $rootScope, $location, ERC20ContractInfo, ERC20Transfers,
 	if (!Web3Utils.isAddress($routeParams.address) && !Contracts.isValidSiriusAddress($routeParams.address)) {
 
 		$rootScope.flashMessage = 'Invalid Address: ' + $routeParams.address;
-        $location.path('/e404').replace();
+        $location.path('e404').replace();
 
         return false;
 
@@ -19,7 +19,7 @@ function($routeParams, $rootScope, $location, ERC20ContractInfo, ERC20Transfers,
 
         contractEthAddress = Contracts.getEthAddressFromBitAddress($routeParams.address);
 
-        $location.path('/token/' + contractEthAddress).replace();
+        $location.path('token/' + contractEthAddress).replace();
 
         return false;
 
@@ -179,7 +179,7 @@ function($routeParams, $rootScope, $location, ERC20ContractInfo, ERC20Transfers,
 		}
 
 		self.tab = tabName;
-        $location.path('/token/' + $routeParams.address + '/' + tabName, false);
+        $location.path('token/' + $routeParams.address + '/' + tabName, false);
 		_loadTabContent();
 
 	};

@@ -6,7 +6,7 @@
     "email": "hello@getsirius.io",
     "url": "https://getsirius.io"
   },
-  "version": "0.11.3",
+  "version": "0.11.4",
   "repository": "git://github.com/siriuscore/sirius-explorer.git",
   "contributors": [],
   "bugs": {
@@ -25,7 +25,19 @@
   "siriuscoreNode": "siriuscore-node",
   "dependencies": {},
   "devDependencies": {
-    "bower": "^1.8.4",
+    "angular": "~1.6.10",
+    "angular-animate": "~1.6.10",
+    "angular-resource": "~1.6.10",
+    "angular-route": "~1.6.10",
+    "angular-ui-bootstrap": "^2.5.0",
+    "angular-chart.js": "^1.1.1",
+    "angular-gettext": "^2.4.1",
+    "angular-moment": "^1.2.0",
+    "angular-numeraljs": "^2.0.1",
+    "angular-qrcode": "^7.2.0",
+    "bootstrap": "~3.1.1",
+    "chart.js": "^2.7.2",
+    "clipboard": "^1.5.16",
     "grunt": "^1.0.3",
     "grunt-angular-gettext": "^2.3.13",
     "grunt-cli": "^1.3.0",
@@ -36,6 +48,14 @@
     "grunt-css": "^0.5.4",
     "grunt-macreload": "^0.1.4",
     "grunt-markdown": "^0.7.0",
-    "siriuscore-lib": "0.0.2"
+    "jquery": "^3.3.1",
+    "jquery.scrollbar": "0.2.11",
+    "malihu-custom-scrollbar-plugin": "^3.1.5",
+    "moment": "^2.22.2",
+    "ngclipboard": "^1.1.2",
+    "ng-scrollbars": "^0.0.11",
+    "numeral": "^2.0.6",
+    "qrcode-generator": "^1.4.0",
+    "tooltipster": "^4.2.6"
   }
 }

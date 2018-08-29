@@ -23,7 +23,7 @@ function($scope, $rootScope, $routeParams, $location, moment, Block, Blocks, Blo
 			blockHeight: $routeParams.blockHeight
 		}, function(hash) {
 
-			$location.path('/block/' + hash.blockHash);
+			$location.path('block/' + hash.blockHash);
 		}, function() {
 
 			$rootScope.flashMessage = 'Bad Request';
@@ -39,7 +39,7 @@ function($scope, $rootScope, $routeParams, $location, moment, Block, Blocks, Blo
 		if (newValue !== oldValue && scope.BC.datepicker.isOpened) {
 
 			self.datepicker.date = newValue.getTime();
-			$location.path('/blocks-date/' + moment(newValue).format('YYYY-MM-DD'));
+			$location.path('blocks-date/' + moment(newValue).format('YYYY-MM-DD'));
 		}
 	});
 

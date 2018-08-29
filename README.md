@@ -13,12 +13,26 @@ A Sirius blockchain explorer web application service for [Siriuscore Node](https
 
 2. Install mongo https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/  
 
+Then open a Mongodb client window and create a user and database:
+
+```
+use sirius-api-livenet
+db.createUser(
+   {
+     user: "sirius",
+     pwd: "mynewpassword",
+     roles: [ "readWrite", "dbAdmin" ]
+   }
+)
+```
+
 3. Install the sirius core wallet https://github.com/siriuscore/sirius
 
     ```bash
     # with ZMQ
     sudo apt-get install libzmq3-dev
-    ```  
+    ```
+
 4. Install siriuscore-node
 
     ```bash
@@ -34,49 +48,46 @@ A Sirius blockchain explorer web application service for [Siriuscore Node](https
 
 5. Edit siriuscore-node.json
 
-    ```json
-      {
-        "network": "livenet",
-        "port": 3001,
-        "services": [
-          "siriusd",
-          "web",
-          "sirius-insight-api",
-          "sirius-explorer"
-        ],
-        "servicesConfig": {
-          "sirius-explorer": {
-            "apiPrefix": "sirius-insight-api",
-            "routePrefix": "sirius-explorer",
-            "nodemapLink": "https://sirius.org/en/nodemap"
+```json
+  {
+    "network": "livenet",
+    "port": 3001,
+    "services": [
+      "siriusd",
+      "web",
+      "sirius-insight-api",
+      "sirius-explorer"
+    ],
+    "servicesConfig": {
+      "sirius-explorer": {
+        "apiPrefix": "sirius-insight-api",
+        "routePrefix": "sirius-explorer",
+        "nodemapLink": "https://sirius.org/en/nodemap"
+    },
+      "sirius-insight-api": {
+        "routePrefix": "sirius-insight-api",
+        "db": {
+          "user": "sirius",
+          "password": "mynewpassword",
+          "host": "localhost",
+          "port": 27017,
+          "database": "sirius-api-livenet"
         },
-          "sirius-insight-api": {
-            "routePrefix": "sirius-insight-api",
-            "db": {
-              "user": "sirius",
-              "password": "mysafepassword",
-              "host": "localhost",
-              "port": 27017,
-              "database": "admin"
-            },
-            "erc20Config": {
-              "updateFromBlockHeight": 0
-            },
-            "erc20": {
-              "updateFromBlockHeight": 0
-            }
-          },
-          "siriusd": {
-            "spawn": {
-              "datadir": "/home/user/.sirius",
-              "exec": "/home/user/sirius/src/siriusd"
-            }
-          }
+        "erc20": {
+          "updateFromBlockHeight": 10000
+        }
+      },
+      "siriusd": {
+        "spawn": {
+          "datadir": "/home/user/.sirius",
+          "exec": "/home/user/sirius/src/siriusd"
         }
       }
-    ```  
+    }
+  }
+```  
 
-6. Edit sirius.conf  
+6. Edit sirius.conf and make sure siriusd runs correctly. You need to run siriusd at least once with `reindex=1` enabled. Once the chain is synced you can kill siriusd and comment the `#reindex=1` setting like below.
 
     ```bash
     server=1
@@ -99,7 +110,7 @@ A Sirius blockchain explorer web application service for [Siriuscore Node](https
     #reindex=1
     ```  
 
-7. Run Node  
+7. Run Node:
 
     ```bash
     $(npm bin)/siriuscore-node start
@@ -111,10 +122,10 @@ A Sirius blockchain explorer web application service for [Siriuscore Node](https
 
 To run Insight UI locally in development mode:
 
-Install bower dependencies:
+Install dependencies:
 
 ```bash
-bower install
+npm install
 ```
 
 To compile and minify the web application's assets:

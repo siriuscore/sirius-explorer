@@ -15,7 +15,7 @@
                 <div class="ddMenu">
                     <ul class="ddMenu__list">
                         <li class="ddMenu__item" ng-repeat="item in TSC.searchResult.items">
-                            <a href="/token/{{ item.contract_address }}" class="ddMenu__link">
+                            <a href="token/{{ item.contract_address }}" class="ddMenu__link">
                                 <span class="ddMenu__linkRow">{{ item.name ? item.name : item.contract_address }} {{ item.symbol ? '(' + item.symbol + ')' : '' }}</span>
                                 <span class="ddMenu__linkRow muted">
 										ERC20 TOKEN: {{ item.contract_address }}
@@ -50,7 +50,7 @@
             <div class="tr" ng-repeat="contract in TSC.contractsList">
                 <div class="td">
                     <div class="">
-                        <a href="/token/{{ contract.contract_address }}" class="ellipsis mark title">{{ contract.symbol }} {{ contract.name ? ((contract.symbol ? '- ' : '') + contract.name) : '' }}</a>
+                        <a href="token/{{ contract.contract_address }}" class="ellipsis mark title">{{ contract.symbol }} {{ contract.name ? ((contract.symbol ? '- ' : '') + contract.name) : '' }}</a>
                     </div>
                     <div ng-if="contract.description" class="descr muted">
                         {{ contract.description }}
