@@ -31,10 +31,11 @@ db.createUser(
 Compile the addressindex branch and make sure you have ZMQ installed
 
     ```bash
-    sudo apt-get install libzmq3-dev
     git clone https://github.com/siriuscore/sirius
     git fetch origin
     git checkout addressindex
+    # with ZMQ
+    sudo apt-get install libzmq3-dev
     ```
     Continue by following instructions here https://github.com/siriuscore/sirius
 
