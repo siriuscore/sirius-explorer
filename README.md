@@ -26,12 +26,18 @@ db.createUser(
 )
 ```
 
-3. Install the sirius core wallet https://github.com/siriuscore/sirius
+3. Sirius wallet installation
+
+Compile the addressindex branch and make sure you have ZMQ installed
 
     ```bash
+    git clone https://github.com/siriuscore/sirius
+    git fetch origin
+    git checkout addressindex
     # with ZMQ
     sudo apt-get install libzmq3-dev
     ```
+    Continue by following instructions here https://github.com/siriuscore/sirius
 
 4. Install siriuscore-node
 
@@ -46,7 +52,7 @@ db.createUser(
     $(npm bin)/siriuscore-node install https://github.com/siriuscore/sirius-explorer.git#master
     ```
 
-5. Edit siriuscore-node.json
+5. Edit siriuscore-node.json to be similar to this:
 
 ```json
   {
