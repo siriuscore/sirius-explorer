@@ -770,7 +770,7 @@ b, strong {
 .section {
   clear: both; }
   .section__heading {
-    margin-bottom: 30px; }
+    margin-bottom: 10px; }
     .section__heading.bdb {
       border-bottom: 1px dashed #295f7c;
       padding-bottom: 17px;
@@ -5201,7 +5201,7 @@ corresponds to the arrow we want to display */
 
 .tockenSummary {
   overflow: hidden;
-  margin-top: 50px;
+  margin-top: 20px;
   margin-bottom: 105px; }
   .tockenSummary .col:nth-child(1) {
     padding-right: 15px; }
